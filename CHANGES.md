@@ -1,3 +1,7 @@
+# v2.0.0 (2024-06-29)
+
+* use digestif instead of mirage-crypto (@dinosaure @hannesm)
+
 # v1.0.4 (2020-03-11)
 
 * use mirage-crypto instead of nocrypto
