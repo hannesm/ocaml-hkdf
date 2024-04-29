@@ -1,21 +1,15 @@
 
 let test ~hash ~ikm ?salt ?info ~l ~prk ~okm () =
-  let ikm = Cstruct.of_hex ikm
-  and salt = match salt with None -> None | Some x -> Some (Cstruct.of_hex x)
-  and info = match info with None -> None | Some x -> Some (Cstruct.of_hex x)
-  and prk = Cstruct.of_hex prk
-  and okm = Cstruct.of_hex okm
+  let ikm = Ohex.decode ikm
+  and salt = match salt with None -> None | Some x -> Some (Ohex.decode x)
+  and info = match info with None -> None | Some x -> Some (Ohex.decode x)
+  and prk = Ohex.decode prk
+  and okm = Ohex.decode okm
   in
   (fun () ->
    let cprk = Hkdf.extract ~hash ?salt ikm in
-   let prk = Cstruct.to_string prk
-   and scprk = Cstruct.to_string cprk
-   in
-   Alcotest.check Alcotest.string "PRK matches" prk scprk ;
+   Alcotest.check Alcotest.string "PRK matches" prk cprk ;
    let cokm = Hkdf.expand ~hash ~prk:cprk ?info l in
-   let okm = Cstruct.to_string okm
-   and cokm = Cstruct.to_string cokm
-   in
    Alcotest.check Alcotest.string "OKM matches" okm cokm)
 
 let test1 =
