@@ -1,3 +1,5 @@
+Note: this repository is archived, and is now part of [kdf](https://github.com/robur-coop/kdf).
+
 # hkdf - HMAC-based Extract-and-Expand Key Derivation Function (RFC 5869)
 
 An implementation of [HKDF](https://tools.ietf.org/html/rfc5869) using
